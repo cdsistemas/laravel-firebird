@@ -109,16 +109,17 @@ class FirebirdGrammar extends Grammar
         $select = "Select ";
         // In Firebird 1.5, the correct syntax of pagination is "Select first X skip Y from table" instead of "Select * from table rows X to Y"
         if($query->limit){
-            $select . " first $query->limit";
+            $select .= " first $query->limit";
         }
         if($query->offset){
-            $select . " skip $query->offset";
+            $select .= " skip $query->offset";
         }
 
         if ($query->distinct) {
             $select = 'distinct ';
         }
-        return $select . $this->columnize($columns);
+        $x = $select . $this->columnize($columns);
+        return $x;
     }
 
     /**
